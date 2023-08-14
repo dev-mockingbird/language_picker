@@ -1,7 +1,8 @@
-name: language_pickers
-description: It makes language select pickers for you in Flutter. You can use it freely in lots of ways.
-version: 0.2.0+1
-homepage: https://github.com/gomgom/flutter_language_pickers
+name: language_picker
+description: Language picker dropdown and dialog.
+version: 0.4.3
+homepage: https://www.wafrat.com/
+repository: https://github.com/atn832/language_picker
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -9,11 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  recase: ^4.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-#flutter:
-#  assets:
-#  - assets/
+flutter:
+  assets:
+    - assets/fonts/Roboto/

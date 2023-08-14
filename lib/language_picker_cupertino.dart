@@ -1,5 +1,5 @@
-import 'package:language_pickers/languages.dart';
-import 'package:language_pickers/utils/typedefs.dart';
+import 'package:language_picker/languages.dart';
+import 'package:language_picker/utils/typedefs.dart';
 import 'package:flutter/cupertino.dart';
 
 const double defaultPickerSheetHeight = 216.0;
@@ -60,7 +60,7 @@ class LanguagePickerCupertino extends StatefulWidget {
   final FixedExtentScrollController? scrollController;
 
   /// List of languages available in this picker.
-  final List<Map<String, String>>? languagesList;
+  final List<Language>? languages;
 
   const LanguagePickerCupertino({
     Key? key,
@@ -75,11 +75,12 @@ class LanguagePickerCupertino extends StatefulWidget {
     this.useMagnifier,
     this.magnification,
     this.scrollController,
-    this.languagesList,
+    this.languages,
   }) : super(key: key);
 
   @override
-  _CupertinoLanguagePickerState createState() => _CupertinoLanguagePickerState();
+  _CupertinoLanguagePickerState createState() =>
+      _CupertinoLanguagePickerState();
 }
 
 class _CupertinoLanguagePickerState extends State<LanguagePickerCupertino> {
@@ -88,8 +89,7 @@ class _CupertinoLanguagePickerState extends State<LanguagePickerCupertino> {
   @override
   void initState() {
     super.initState();
-    final languageList = widget.languagesList ?? defaultLanguagesList;
-    _allLanguages = languageList.map((item) => Language.fromMap(item)).toList();
+    _allLanguages = widget.languages ?? Languages.defaultLanguages;
   }
 
   @override

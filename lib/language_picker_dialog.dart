@@ -1,7 +1,7 @@
-import 'package:language_pickers/languages.dart';
-import 'package:language_pickers/utils/typedefs.dart';
+import 'package:language_picker/languages.dart';
+import 'package:language_picker/utils/typedefs.dart';
 
-import 'package:language_pickers/utils/my_alert_dialog.dart';
+import 'package:language_picker/utils/my_alert_dialog.dart';
 import 'package:flutter/material.dart';
 
 ///Provides a customizable [Dialog] which displays all languages
@@ -74,7 +74,7 @@ class LanguagePickerDialog extends StatefulWidget {
   final Widget? searchEmptyView;
 
   /// List of languages available in this picker.
-  final List<Map<String, String>>? languagesList;
+  final List<Language>? languages;
 
   LanguagePickerDialog({
     Key? key,
@@ -92,7 +92,7 @@ class LanguagePickerDialog extends StatefulWidget {
     this.searchInputDecoration,
     this.searchCursorColor,
     this.searchEmptyView,
-    this.languagesList,
+    this.languages,
   }) : super(key: key);
 
   @override
@@ -107,8 +107,7 @@ class SingleChoiceDialogState extends State<LanguagePickerDialog> {
 
   @override
   void initState() {
-    final languageList = widget.languagesList ?? defaultLanguagesList;
-    _allLanguages = languageList.map((item) => Language.fromMap(item)).toList();
+    _allLanguages = widget.languages ?? Languages.defaultLanguages;
     _filteredLanguages = _allLanguages;
     super.initState();
   }

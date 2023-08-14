@@ -1,32 +1,41 @@
-## [0.2.0+1] - 3rd March, 2020
+## 0.4.3
 
-- Fix type bugs for other widgets.
-- Remove author sector in pubspec.yaml
+- Fixed bug when Language was being used as a Key in a Set or Map.
 
+## 0.4.2
 
-## [0.2.0] - 1st March, 2020
+- Implemented LanguagePickerDropdownController.
 
-- Bug fixes.
-- Change languages type.
+## 0.4.1
 
+- Restored finding a language by ISO code as `Language.fromIsoCode(isoCode)`.
 
-## [0.1.3] - 9th October, 2019
+## 0.4.0
 
-- (Pull Request Merge -- Masato Nagashima) Renamed from country to language.
-- (Pull Request Merge -- Masato Nagashima) Enabled a user of this picker to choose his/her own language list.
-- (Pull Request Merge -- Masato Nagashima) Changed from native writing systems to English.
+Breaking changes:
 
+- Replaced `LanguagePickerUtils.getLanguageByIsoCode(isoCode)` by `Languages.languageName`.
+- Replaced `List<Map<String, String>> defaultLanguagesList` by `List<Language> Languages.defaultLanguages`.
+- Replaced LanguagePickerDropdown's `String? initialValue` parameter by `Language? initialValue`.
+- Replaced LanguagePickerDialog and LanguerPickerCupertino's `List<Map<String, String>>? languagesList` parameter by `List<Language>> languages`.
 
-## [0.1.2] - 11th February, 2019
+Other:
 
-- Fix README.md.
+- Implemented the `Language.==` operator.
+- Removed duplicate Norwegian language.
 
+## 0.3.0+1
 
-## [0.1.1] - 19th January, 2019
+- Documented usage example.
 
-- Fix error 'Error: unable to find directory entry in pubspec.yaml'.
+## 0.3.0
 
+- Rename the library to to language_picker.
+- Fixed LanguagePickerDropdown's layout to render well with Flex, eg when two of them are laid out in a Row.
+- Changed LanguagePickerDropdown's `List<Map<String, String>> languagesList` to `List<Language> languages`.
+- Introduced `Map<String, Language> defaultLanguageMap` and `List<Language> defaultLanguages`.
+- Removed duplicate English language from the default list.
+- Removed dates from Greek and Occitan, eg "Greek, Modern (1453-)" to "Greek".
+- Migrated to null safety. Thank you [spsarolkar](https://github.com/spsarolkar)!
 
-## [0.1.0] - 17th January, 2019
-
-- First release of package(language_pickers).
+See the original package's prior changes at https://pub.dev/packages/language_pickers/changelog.

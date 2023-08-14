@@ -1,11 +1,16 @@
-import 'package:language_pickers/languages.dart';
-import 'package:language_pickers/utils/typedefs.dart';
+import 'package:language_picker/language_picker_dropdown_controller.dart';
+import 'package:language_picker/languages.dart';
+import 'package:language_picker/utils/typedefs.dart';
 import 'package:flutter/material.dart';
 
 ///Provides a customizable [DropdownButton] for all languages
 class LanguagePickerDropdown extends StatefulWidget {
   LanguagePickerDropdown(
-      {this.itemBuilder, this.initialValue, this.onValuePicked, this.languagesList});
+      {this.itemBuilder,
+      this.controller,
+      this.initialValue,
+      this.onValuePicked,
+      this.languages});
 
   ///This function will be called to build the child of DropdownMenuItem
   ///If it is not provided, default one will be used which displays
@@ -13,15 +18,17 @@ class LanguagePickerDropdown extends StatefulWidget {
   ///Check _buildDefaultMenuItem method for details.
   final ItemBuilder? itemBuilder;
 
-  ///It should be one of the ISO ALPHA-2 Code that is provided
-  ///in languagesList map of languages.dart file.
-  final String? initialValue;
+  ///Preselected language.
+  final Language? initialValue;
 
   ///This function will be called whenever a Language item is selected.
   final ValueChanged<Language>? onValuePicked;
 
+  /// An optional controller.
+  final LanguagePickerDropdownController? controller;
+
   /// List of languages available in this picker.
-  final List<Map<String, String>>? languagesList;
+  final List<Language>? languages;
 
   @override
   _LanguagePickerDropdownState createState() => _LanguagePickerDropdownState();
@@ -33,21 +40,26 @@ class _LanguagePickerDropdownState extends State<LanguagePickerDropdown> {
 
   @override
   void initState() {
-    final languageList = widget.languagesList ?? defaultLanguagesList;
-    _languages = languageList.map((item) => Language.fromMap(item)).toList();
+    _languages = widget.languages ?? Languages.defaultLanguages;
     if (widget.initialValue != null) {
       try {
         _selectedLanguage = _languages
-            .where((language) =>
-                language.isoCode == widget.initialValue)
-            .toList()[0];
+            .firstWhere((language) => language == widget.initialValue!);
       } catch (error) {
         throw Exception(
-            "The initialValue provided is not a supported iso code!");
+            "The initialValue is missing from the list of displayed languages!");
       }
+    } else if (widget.controller != null) {
+      _selectedLanguage = widget.controller!.value;
     } else {
       _selectedLanguage = _languages[0];
     }
+
+    widget.controller?.addListener(() {
+      setState(() {
+        _selectedLanguage = widget.controller!.value;
+      });
+    });
 
     super.initState();
   }
@@ -62,33 +74,22 @@ class _LanguagePickerDropdownState extends State<LanguagePickerDropdown> {
                 : _buildDefaultMenuItem(language)))
         .toList();
 
-    return Row(
-      children: <Widget>[
-        DropdownButtonHideUnderline(
-          child: DropdownButton<Language>(
-            isDense: true,
-            onChanged: (value) {
-              setState(() {
-                _selectedLanguage = value!;
-                widget.onValuePicked!(value);
-              });
-            },
-            items: items,
-            value: _selectedLanguage,
-          ),
-        ),
-      ],
+    return DropdownButtonHideUnderline(
+      child: DropdownButton<Language>(
+        isExpanded: true,
+        onChanged: (value) {
+          setState(() {
+            _selectedLanguage = value!;
+            widget.onValuePicked!(value);
+          });
+        },
+        items: items,
+        value: _selectedLanguage,
+      ),
     );
   }
 
   Widget _buildDefaultMenuItem(Language language) {
-    return Row(
-      children: <Widget>[
-        SizedBox(
-          width: 8.0,
-        ),
-        Text("${language.name} (${language.isoCode})"),
-      ],
-    );
+    return Text("${language.name} (${language.isoCode})");
   }
 }

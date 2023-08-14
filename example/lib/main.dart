@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/cupertino.dart';
 
-import 'package:language_pickers/languages.dart';
-import 'package:language_pickers/language_pickers.dart';
+import 'package:language_picker/languages.dart';
+import 'package:language_picker/language_picker.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,11 +11,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'language_pickers Example',
+      title: 'language_picker Example',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'language_pickers Example'),
+      home: MyHomePage(title: 'language_picker Example'),
     );
   }
 }
@@ -30,12 +30,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Language _selectedDropdownLanguage =
-      LanguagePickerUtils.getLanguageByIsoCode('ko');
-  Language _selectedDialogLanguage =
-      LanguagePickerUtils.getLanguageByIsoCode('ko');
-  Language _selectedCupertinoLanguage =
-      LanguagePickerUtils.getLanguageByIsoCode('ko');
+  Language _selectedDropdownLanguage = Languages.korean;
+  Language _selectedDialogLanguage = Languages.korean;
+  Language _selectedCupertinoLanguage = Languages.korean;
 
   // It's sample code of Dropdown Item.
   Widget _buildDropdownItem(Language language) {
@@ -111,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Expanded(
                 child: Center(
                   child: LanguagePickerDropdown(
-                    initialValue: 'ko',
+                    initialValue: Languages.korean,
                     itemBuilder: _buildDropdownItem,
                     onValuePicked: (Language language) {
                       _selectedDropdownLanguage = language;

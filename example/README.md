@@ -1,6 +1,6 @@
-# language_pickers_example
+# language_picker_example
 
-It&#x27;s demo application of language_pickers Flutter package.
+It&#x27;s demo application of language_picker Flutter package.
 
 ## Getting Started
 
