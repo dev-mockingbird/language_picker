@@ -265,6 +265,7 @@ class Languages {
     Languages.chamorro,
     Languages.chechen,
     Languages.chewaNyanja,
+    Languages.chinese,
     Languages.chineseSimplified,
     Languages.chineseTraditional,
     Languages.churchSlavonic,
