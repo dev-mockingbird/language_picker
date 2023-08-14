@@ -3,8 +3,6 @@ import 'package:language_pickers/utils/typedefs.dart';
 
 import 'package:language_pickers/utils/my_alert_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-import 'languages.dart';
 
 ///Provides a customizable [Dialog] which displays all languages
 /// with optional search feature
@@ -179,7 +177,9 @@ class SingleChoiceDialogState extends State<LanguagePickerDialog> {
           _filteredLanguages = _allLanguages
               .where((Language language) =>
                   language.name.toLowerCase().startsWith(value.toLowerCase()) ||
-                  language.isoCode.toLowerCase().startsWith(value.toLowerCase()))
+                  language.isoCode
+                      .toLowerCase()
+                      .startsWith(value.toLowerCase()))
               .toList();
         });
       },

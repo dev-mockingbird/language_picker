@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -83,10 +83,10 @@ class _MyHomePageState extends State<MyHomePage> {
         return LanguagePickerCupertino(
           pickerSheetHeight: 200.0,
           onValuePicked: (Language language) => setState(() {
-                _selectedCupertinoLanguage = language;
-                print(_selectedCupertinoLanguage.name);
-                print(_selectedCupertinoLanguage.isoCode);
-              }),
+            _selectedCupertinoLanguage = language;
+            print(_selectedCupertinoLanguage.name);
+            print(_selectedCupertinoLanguage.isoCode);
+          }),
         );
       });
 
