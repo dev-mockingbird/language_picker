@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+  MyHomePage({super.key, required this.title});
 
   final String title;
 
@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
         SizedBox(
           width: 8.0,
         ),
-        Text("${language.name} (${language.isoCode})"),
+        Text("${language.nativeName} (${language.isoCode})"),
       ],
     );
   }
@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // It's sample code of Dialog Item.
   Widget _buildDialogItem(Language language) => Row(
         children: <Widget>[
-          Text(language.name),
+          Text(language.nativeName),
           SizedBox(width: 8.0),
           Flexible(child: Text("(${language.isoCode})"))
         ],

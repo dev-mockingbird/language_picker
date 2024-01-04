@@ -5,12 +5,18 @@ import 'package:flutter/material.dart';
 
 ///Provides a customizable [DropdownButton] for all languages
 class LanguagePickerDropdown extends StatefulWidget {
-  LanguagePickerDropdown(
-      {this.itemBuilder,
-      this.controller,
-      this.initialValue,
-      this.onValuePicked,
-      this.languages});
+  LanguagePickerDropdown({
+    this.itemBuilder,
+    this.controller,
+    this.initialValue,
+    this.onValuePicked,
+    this.languages,
+    this.isExpanded,
+    this.alignment,
+  });
+
+  final bool? isExpanded;
+  final Alignment? alignment;
 
   ///This function will be called to build the child of DropdownMenuItem
   ///If it is not provided, default one will be used which displays
@@ -76,7 +82,8 @@ class _LanguagePickerDropdownState extends State<LanguagePickerDropdown> {
 
     return DropdownButtonHideUnderline(
       child: DropdownButton<Language>(
-        isExpanded: true,
+        isExpanded: widget.isExpanded ?? false,
+        alignment: widget.alignment ?? Alignment.centerRight,
         onChanged: (value) {
           setState(() {
             _selectedLanguage = value!;
@@ -90,6 +97,6 @@ class _LanguagePickerDropdownState extends State<LanguagePickerDropdown> {
   }
 
   Widget _buildDefaultMenuItem(Language language) {
-    return Text("${language.name} (${language.isoCode})");
+    return Text("${language.nativeName} (${language.isoCode})");
   }
 }
